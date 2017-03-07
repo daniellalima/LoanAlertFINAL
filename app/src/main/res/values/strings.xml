@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Loan Alert</string>
+
+    <string name="label_login_field">Login</string>
+    <string name="label_password_field">Senha</string>
+    <string name="label_login_button">Login</string>
+    <string name="label_register_button">Cadastrar</string>
+    <string name="label_recover_button">Recuperar senha</string>
+
+    <string name="label_register_actiity">Cadastrar nova conta</string>
+    <string name="label_name_field">Nome</string>
+    <string name="label_id_number_field">Matrícula</string>
+    <string name="label_institution_field">Instituição</string>
+    <string name="label_email_field">Email</string>
+    <string name="label_password_confirmation_field">Confirmação de senha</string>
+
+    <string name="label_new_loan_entry_activity">Cadastrar novo ítem</string>
+    <string name="label_edit_loan_entry_activity">Editar ítem</string>
+    <string name="label_title_field">Título</string>
+    <string name="label_observations_field">Observações</string>
+    <string name="label_creation_date_field">Data de criação</string>
+    <string name="label_due_date_field">Data de entrega</string>
+    <string name="label_save_button">Salvar</string>
+    <string name="action_loan_entry_reset">Resetar</string>
+    <string name="action_loan_entry_remove">Remover</string>
+    <string name="notification_item_must_be_returned">Esse ítem precisa ser devolvido!</string>
+
+</resources>

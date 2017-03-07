@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="MyLoansTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="RegularTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="LabelledMarqueeEditTextCustomStyle">
+        <item name="baseColor">@color/colorPrimary</item>
+        <item name="highlightColor">@color/colorAccent</item>
+    </style>
+
+</resources>
