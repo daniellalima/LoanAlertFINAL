@@ -24,5 +24,7 @@
     <string name="action_loan_entry_reset">Resetar</string>
     <string name="action_loan_entry_remove">Remover</string>
     <string name="notification_item_must_be_returned">Esse ítem precisa ser devolvido!</string>
+    <string name="action_my_loans_search">Pesquisar</string>
 
 </resources>
+

@@ -14,6 +14,10 @@ import com.activeandroid.query.Select;
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +37,7 @@ public class MyLoansFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         return inflater.inflate(R.layout.fragment_my_loans, container, false);
     }
 
@@ -51,17 +56,37 @@ public class MyLoansFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        refreshLoanEntries(null);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(SearchEvent event) {
+        String newQuery = event.getQueryString();
+        refreshLoanEntries(newQuery == null || newQuery.trim().isEmpty() ? null : newQuery);
+    }
+
+    private void refreshLoanEntries(final String queryString) {
         new Thread(new Runnable() {
 
             @Override
             public void run() {
                 final List<LoanEntry> loanEntryList = new Select().from(LoanEntry.class).execute();
+                final List<LoanEntry> filteredEntries = new LinkedList<>();
+                if (queryString == null) {
+                    filteredEntries.addAll(loanEntryList);
+                } else {
+                    for (LoanEntry loanEntry : loanEntryList) {
+                        if (loanEntry.getTitle().toUpperCase().contains(queryString.toUpperCase())) {
+                            filteredEntries.add(loanEntry);
+                        }
+                    }
+                }
                 mainHandler.post(new Runnable() {
 
                     @Override
                     public void run() {
                         adapter.clear();
-                        adapter.addAll(loanEntryList);
+                        adapter.addAll(filteredEntries);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -69,6 +94,12 @@ public class MyLoansFragment extends Fragment {
             }
 
         }).start();
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ufcg.es.loanalert;
 
+import android.app.SearchManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +11,17 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 
 import com.joanzapata.iconify.IconDrawable;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -88,6 +94,35 @@ public class MyLoansActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_loans, menu);
+        menu.getItem(0).setIcon(new IconDrawable(this, "md-search")
+            .actionBarSize().colorRes(android.R.color.white));
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) MenuItemCompat
+            .getActionView(menu.findItem(R.id.menu_search));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setQueryHint(getString(R.string.action_my_loans_search));
+        final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(final String newQuery) {
+                EventBus.getDefault().post(new SearchEvent(newQuery));
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
+                return true;
+            }
+
+        };
+        searchView.setOnQueryTextListener(queryTextListener);
+        return true;
     }
 
     @Override
