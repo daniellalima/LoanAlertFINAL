@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ufcg.es.loanalert">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".CustomApplication"
@@ -10,46 +14,45 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/RegularTheme">
-
         <activity
-            android:name=".LoginActivity">
-        </activity>
+            android:name=".Login_Activity"
+            android:label="@string/title_activity_login_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/label_register_actiity"/>
-
+            android:label="@string/label_register_actiity" />
         <activity
             android:name=".MyLoansActivity"
             android:label="@string/app_name"
             android:theme="@style/MyLoansTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
+        </activity>
         <activity
             android:name=".LoanEntryActivity"
-            android:label="@string/label_new_loan_entry_activity"/>
+            android:label="@string/label_new_loan_entry_activity" />
 
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".AlarmReceiver" />
 
         <service
             android:name=".AlarmService"
-            android:exported="false"/>
+            android:exported="false" />
 
         <meta-data
             android:name="AA_DB_NAME"
-            android:value="loanalert.db"/>
-
+            android:value="loanalert.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="1"/>
-
+            android:value="1" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.ufcg.es.loanalert.LoanEntry"/>
+            android:value="com.ufcg.es.loanalert.LoanEntry" />
+
 
     </application>
 
