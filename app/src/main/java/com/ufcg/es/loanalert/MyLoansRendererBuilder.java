@@ -15,13 +15,18 @@ class MyLoansRendererBuilder extends RendererBuilder<LoanEntry> {
     }
 
     @Override
-    protected Class getPrototypeClass(LoanEntry guideItem) {
-        return LoanEntryRenderer.class;
+    protected Class getPrototypeClass(LoanEntry loanEntry) {
+        if (loanEntry.getDueDate().isBeforeNow()) {
+            return LateLoanEntryRenderer.class;
+        } else {
+            return LoanEntryRenderer.class;
+        }
     }
 
     private List<Renderer<LoanEntry>> getPrototypes(Context context) {
         List<Renderer<LoanEntry>> prototypes = new LinkedList<>();
         prototypes.add(new LoanEntryRenderer(context));
+        prototypes.add(new LateLoanEntryRenderer(context));
         return prototypes;
     }
 
