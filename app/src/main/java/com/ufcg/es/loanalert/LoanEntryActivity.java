@@ -149,7 +149,7 @@ public class LoanEntryActivity extends AppCompatActivity {
 
     private void validateSaveButton() {
         if (TextUtils.isEmpty(loanEntryTitle.getText())
-                || TextUtils.isEmpty(loanEntryObservations.getText())
+                //|| TextUtils.isEmpty(loanEntryObservations.getText())
                 || TextUtils.isEmpty(loanEntryDueDate.getText())) {
             loanEntrySaveButton.setEnabled(false);
         } else {

@@ -16,7 +16,7 @@
         android:theme="@style/RegularTheme">
         <activity
             android:name=".Login_Activity"
-            android:label="@string/title_activity_login_">
+            android:label="Loan Alert">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
